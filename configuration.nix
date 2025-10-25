@@ -56,7 +56,7 @@
       enable = true;
       enableIPv6 = true;
       externalInterface = "ens18";
-      internalInterfaces = [ "wg0" ];
+      # internalInterfaces = [ "wg0" ];
     };
   };
 
