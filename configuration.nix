@@ -37,6 +37,7 @@
     neofetch
     git
     tree
+    resilio-sync
   ];
 
 
@@ -102,6 +103,12 @@
       enable = true;
       user = "user";
       openFirewall = true;
+    };
+
+    resilio = {
+			enable=true;
+			enableWebUI=true;
+			httpListenPort=9000;
     };
   };
 
