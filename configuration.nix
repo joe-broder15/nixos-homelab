@@ -56,7 +56,7 @@
       enable = true;
       enableIPv6 = true;
       externalInterface = "ens18";
-      # internalInterfaces = [ "wg0" ];
+      internalInterfaces = [ "wg0" ];
     };
   };
 
@@ -111,6 +111,12 @@
 			httpListenAddr = "192.168.1.101";  
     	httpListenPort = 9000;
     };
+
+		dnsmasq = {
+      enable = true;
+      extraConfig = ''
+        interface=wg0
+      '';
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
