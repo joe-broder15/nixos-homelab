@@ -57,13 +57,6 @@
       externalInterface = "ens18";
       internalInterfaces = [ "wg0" ];
     };
-
-    # Example proxy configuration (disabled by default).
-    # proxy.default = "http://user:password@proxy:port/";
-    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-    # Example wireless support if you need wpa_supplicant.
-    # wireless.enable = true;
   };
 
   # Set your time zone.
