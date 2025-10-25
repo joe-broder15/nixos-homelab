@@ -108,7 +108,8 @@
     resilio = {
 			enable=true;
 			enableWebUI=true;
-			httpListenPort=9000;
+			httpListenAddr = "0.0.0.0";   # or "127.0.0.1" if reverse-proxying
+    	httpListenPort = 8888;        # <- set your desired port here
     };
   };
 
