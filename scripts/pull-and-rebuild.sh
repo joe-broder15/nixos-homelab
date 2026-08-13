@@ -14,4 +14,4 @@ CLOSURE_NAME="$1"
 
 git -C "${REPO_ROOT}" pull --ff-only
 
-sudo nixos-rebuild switch --flake "${REPO_ROOT}#${CLOSURE_NAME}"
+sudo nixos-rebuild switch --impure --flake "${REPO_ROOT}#${CLOSURE_NAME}"
