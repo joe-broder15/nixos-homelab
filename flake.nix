@@ -33,7 +33,7 @@
       nixosConfigurations.homelab = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          ./machines/proxmox-vm.nix
+          /etc/nixos/hardware-configuration.nix
           ./configurations/homelab/configuration.nix
         ];
       };
@@ -41,7 +41,7 @@
       nixosConfigurations.thinkpad = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          ./machines/thinkpad-t14.nix
+          /etc/nixos/hardware-configuration.nix
           ./configurations/thinkpad/configuration.nix
           home-manager.nixosModules.home-manager
           {

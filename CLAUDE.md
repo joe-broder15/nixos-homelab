@@ -4,16 +4,15 @@ This repo defines NixOS configurations for homelab machines, built with flakes.
 
 ## Layout
 
-- `machines/` — hardware-specific configs (one file per physical/virtual machine).
 - `configurations/` — software/service configs, grouped by host.
 - `home/` — standalone Home Manager configs, one file per user.
-- `flake.nix` — fuses a machine config with a host's software configs into a `nixosConfiguration`, and exposes Home Manager configs as `homeConfigurations`.
+- `flake.nix` — fuses `/etc/nixos/hardware-configuration.nix` (read from the host) with a host's software configs into a `nixosConfiguration`, and exposes Home Manager configs as `homeConfigurations`.
 - `scripts/` — helper scripts to assist with deployment.
 
 ```
 .
 ├── README.md                              # Repo overview, supporting files, services, and workflow docs.
-├── flake.nix                              # Defines nixosConfigurations (homelab, thinkpad) and homeConfigurations (zircon).
+├── flake.nix                              # Defines nixosConfigurations (homelab, thinkpad) and homeConfigurations (zircon); hardware config read from /etc/nixos/hardware-configuration.nix on the host.
 ├── flake.lock                             # Pinned input versions for the flake.
 ├── configurations/
 │   ├── homelab/
@@ -23,20 +22,21 @@ This repo defines NixOS configurations for homelab machines, built with flakes.
 │   └── thinkpad/
 │       └── configuration.nix              # ThinkPad T14 desktop configuration with KDE Plasma.
 ├── home/
+│   ├── shell.nix                          # Shared zsh/shell configuration imported by zircon.nix.
 │   └── zircon.nix                         # Home Manager module for the zircon user (shared by standalone + thinkpad).
-├── machines/
-│   ├── proxmox-vm.nix                     # Generated hardware profile for the Proxmox VM.
-│   └── thinkpad-t14.nix                   # Generated hardware profile for the ThinkPad T14.
 └── scripts/
     ├── pull-and-rebuild.sh                # Pulls latest changes and runs nixos-rebuild switch for a given configuration.
     └── pull-and-rebuild-home.sh           # Pulls latest changes and runs home-manager switch for a given home configuration.
 ```
 
+## Agents
+
+- **autodoc** (`.claude/agents/autodoc.md`) — Keeps README.md and CLAUDE.md factually accurate after code changes. Updates file listings, path references, and one-line descriptions when files are added, removed, renamed, or repurposed. Does not restructure or redesign documentation — layout and prose decisions are left to humans. Invoke it after staging or committing changes that affect the file tree or a module's purpose.
+
 ## Adding a new host
 
-1. Add a hardware config under `machines/`.
-2. Add a software config directory under `configurations/`.
-3. Wire both together as a new `nixosConfigurations.<name>` entry in `flake.nix`.
+1. Add a software config directory under `configurations/`.
+2. Wire it together with `/etc/nixos/hardware-configuration.nix` as a new `nixosConfigurations.<name>` entry in `flake.nix`.
 
 ## Home Manager
 

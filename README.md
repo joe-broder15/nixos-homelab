@@ -8,12 +8,12 @@ NixOS configurations for homelab machines, built with flakes.
 Opinionated NixOS configuration for the homelab server running on a Proxmox VM.
 - `configurations/homelab/configuration.nix` is the main module for host/system settings.
 - `configurations/homelab/proxy.nix` contains nginx reverse-proxy and ACME certificate settings.
-- `machines/proxmox-vm.nix` contains the Proxmox VM hardware profile.
+- Hardware configuration is read from `/etc/nixos/hardware-configuration.nix` on the host (not versioned in this repo).
 
 ### thinkpad
 NixOS configuration for ThinkPad T14 laptop with KDE Plasma desktop.
 - `configurations/thinkpad/configuration.nix` contains the desktop configuration.
-- `machines/thinkpad-t14.nix` contains the ThinkPad T14 hardware profile.
+- Hardware configuration is read from `/etc/nixos/hardware-configuration.nix` on the host (not versioned in this repo).
 
 The `flake.nix` (repo root) exposes both configurations as `nixosConfigurations.homelab` and `nixosConfigurations.thinkpad` for flake-based rebuilds.
 
