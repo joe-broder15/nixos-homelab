@@ -68,6 +68,7 @@
     zsh
     resilio-sync
     home-manager
+    gnome-tweaks
   ];
 
   services.resilio = {

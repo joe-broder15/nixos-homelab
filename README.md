@@ -11,7 +11,7 @@ Opinionated NixOS configuration for the homelab server running on a Proxmox VM.
 - Hardware configuration is read from `/etc/nixos/hardware-configuration.nix` on the host (not versioned in this repo).
 
 ### thinkpad
-NixOS configuration for ThinkPad T14 laptop with KDE Plasma desktop.
+NixOS configuration for ThinkPad T14 laptop with GNOME desktop.
 - `configurations/thinkpad/configuration.nix` contains the desktop configuration.
 - Hardware configuration is read from `/etc/nixos/hardware-configuration.nix` on the host (not versioned in this repo).
 
@@ -83,10 +83,12 @@ Create or copy these files on the machine before rebuilding.
 
 ## Scripts
 
-Two helper scripts live in `scripts/`:
+Four helper scripts live in `scripts/`:
 
-- `scripts/pull-and-rebuild.sh <closure>` – runs `git -C <repo-root> pull --ff-only` (where `<repo-root>` is resolved from the script location), validates `<closure>` against `nixosConfigurations` in the local flake, then runs `sudo nixos-rebuild switch --flake <repo-root>#<closure>`.
+- `scripts/pull-and-rebuild.sh <closure>` – runs `git -C <repo-root> pull --ff-only` (where `<repo-root>` is resolved from the script location), validates `<closure>` against `nixosConfigurations` in the local flake, then runs `sudo nixos-rebuild switch --impure --flake <repo-root>#<closure>`.
 - `scripts/pull-and-rebuild-home.sh <name>` – runs `git -C <repo-root> pull --ff-only` (where `<repo-root>` is resolved from the script location), then runs `home-manager switch --flake <repo-root>#<name>` for a `homeConfigurations` entry (e.g. `zircon`). No `sudo`, since Home Manager activates as the invoking user.
+- `scripts/rebuild.sh <closure>` – same as `pull-and-rebuild.sh` but skips the `git pull`, rebuilding from the working tree as-is.
+- `scripts/rebuild-home.sh <name>` – same as `pull-and-rebuild-home.sh` but skips the `git pull`, switching from the working tree as-is.
 
 Ensure scripts are executable (`chmod +x scripts/*.sh`). They assume the repository is cloned on the target machine and that `sudo` is configured.
 

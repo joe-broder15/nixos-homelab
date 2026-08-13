@@ -35,6 +35,7 @@
     keepassxc
     claude-code
     zsh
+    gnomeExtensions.dash-to-panel
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -107,6 +108,12 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
+
+  # GNOME extensions installed via home.packages above are not enabled by
+  # default; they must be activated explicitly by UUID via dconf.
+  dconf.settings."org/gnome/shell".enabled-extensions = [
+    pkgs.gnomeExtensions.dash-to-panel.extensionUuid
+  ];
 
   programs.git = {
     enable = true;
