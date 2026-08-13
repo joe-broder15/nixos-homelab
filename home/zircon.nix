@@ -34,8 +34,6 @@
     proton-vpn
     keepassxc
     claude-code
-    adapta-kde-theme
-    kdePackages.qtstyleplugin-kvantum
     zsh
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
