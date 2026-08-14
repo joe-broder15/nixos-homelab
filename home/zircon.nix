@@ -34,6 +34,7 @@
     proton-vpn
     keepassxc
     claude-code
+    gh
     zsh
     gnomeExtensions.dash-to-panel
     # # Adds the 'hello' command to your environment. It prints a friendly
