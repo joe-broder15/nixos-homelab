@@ -96,6 +96,21 @@ in
     locations."/" = {
       proxyPass = "http://127.0.0.1:8080";
       proxyWebsockets = true;
+      extraConfig = ''
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Real-IP $remote_addr;
+
+        # Streaming responses (SSE) must not be buffered or they arrive garbled/delayed.
+        proxy_buffering off;
+        proxy_cache off;
+
+        # LLM completions can run long; keep the connection open.
+        proxy_read_timeout 1800s;
+        proxy_send_timeout 1800s;
+        proxy_connect_timeout 1800s;
+      '';
     };
   };
 
