@@ -169,6 +169,8 @@
       443
       80
       22
+      8080
+      11434
     ];
   }; # ddns updater web ui; ollama's port is opened via services.ollama.openFirewall
 
