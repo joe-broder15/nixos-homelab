@@ -62,6 +62,6 @@
         modules = [ ./home/zircon.nix ];
       };
 
-      formatter.${system} = pkgs.nixfmt;
+      formatter.${system} = pkgs.nixfmt-tree;
     };
 }

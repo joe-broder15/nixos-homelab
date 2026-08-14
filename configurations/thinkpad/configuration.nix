@@ -54,7 +54,7 @@
       "wheel"
       "rslsync"
     ]; # <-- added rslsync group
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   programs.firefox.enable = true;
