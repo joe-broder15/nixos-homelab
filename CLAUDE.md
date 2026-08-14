@@ -16,7 +16,7 @@ This repo defines NixOS configurations for homelab machines, built with flakes.
 ├── flake.lock                             # Pinned input versions for the flake.
 ├── configurations/
 │   ├── homelab/
-│   │   ├── configuration.nix              # Main host module: packages, networking, users, and service options.
+│   │   ├── configuration.nix              # Main host module: packages, networking, users, and service options (incl. Ollama + Open WebUI).
 │   │   ├── homer.nix                      # Homer dashboard config listing links to other services.
 │   │   └── proxy.nix                      # nginx reverse proxy and ACME wildcard certificate config.
 │   └── thinkpad/

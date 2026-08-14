@@ -149,6 +149,18 @@
       daemon.enable = true;
     };
 
+    # Local LLM server, CPU-only for now.
+    ollama = {
+      enable = true;
+      package = pkgs.ollama-cpu;
+      host = "0.0.0.0";
+      openFirewall = true;
+      loadModels = [ "deepseek-r1:1.5b" ];
+    };
+
+    # Web UI for the local ollama server.
+    open-webui.enable = true;
+
   };
 
   networking.firewall = {
@@ -158,7 +170,7 @@
       80
       22
     ];
-  }; # ddns updater web ui
+  }; # ddns updater web ui; ollama's port is opened via services.ollama.openFirewall
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.user = {

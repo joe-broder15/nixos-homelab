@@ -43,6 +43,11 @@
               url = "https://ddns.local.clubtropicalexcellent.vip";
             }
             {
+              name = "Open WebUI";
+              logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/open-webui.png";
+              url = "https://openwebui.local.clubtropicalexcellent.vip";
+            }
+            {
               name = "Proxmox";
               logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/proxmox.png";
               url = "https://proxmox.local.clubtropicalexcellent.vip";

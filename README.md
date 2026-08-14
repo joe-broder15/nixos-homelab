@@ -62,6 +62,8 @@ Create or copy these files on the machine before rebuilding.
 - qbittorrent headless client.
 - Plex Media Server.
 - Resilio Sync with WebUI and shared-folder root at `/resilio-shared-folders`.
+- Ollama local LLM server (CPU-only, `pkgs.ollama-cpu`), listening on `0.0.0.0` with `deepseek-r1:1.5b` preloaded.
+- Open WebUI as a front-end for Ollama.
 - CIFS mount for `//192.168.1.99/Library1`.
 - Miscellaneous CLI tooling: `vim`, `wget`, `htop`, `neofetch`, `tree`, `wireguard-tools`, etc.
 
@@ -73,6 +75,7 @@ Create or copy these files on the machine before rebuilding.
 - SillyTavern: `https://sillytavern.local.clubtropicalexcellent.vip`
 - Resilio Sync: `https://resilio.local.clubtropicalexcellent.vip`
 - DDNS Updater: `https://ddns.local.clubtropicalexcellent.vip`
+- Open WebUI: `https://openwebui.local.clubtropicalexcellent.vip`
 - Proxmox: `https://proxmox.local.clubtropicalexcellent.vip`
 
 ## Resilio notes
@@ -103,4 +106,4 @@ Ensure scripts are executable (`chmod +x scripts/*.sh`). They assume the reposit
 2. Edit or update the configuration as needed.
 3. Execute `./scripts/pull-and-rebuild.sh <configuration>` to fetch the latest changes and rebuild the system from the local flake (where `<configuration>` is either `homelab` or `thinkpad`).
 
-For homelab, after each rebuild, verify that services (nginx, ACME issuance, DDNS updater, Resilio Sync, Plex, qbittorrent, WireGuard, CIFS mount) are healthy.
+For homelab, after each rebuild, verify that services (nginx, ACME issuance, DDNS updater, Resilio Sync, Plex, qbittorrent, WireGuard, Ollama, Open WebUI, CIFS mount) are healthy.

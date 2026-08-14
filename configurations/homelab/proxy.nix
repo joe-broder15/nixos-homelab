@@ -89,6 +89,16 @@ in
     };
   };
 
+  # Open WebUI host using the wildcard cert
+  services.nginx.virtualHosts."openwebui.${baseDomain}" = {
+    forceSSL = true;
+    useACMEHost = baseDomain;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:8080";
+      proxyWebsockets = true;
+    };
+  };
+
   # Proxmox host using the wildcard cert
   services.nginx.virtualHosts."proxmox.${baseDomain}" = {
     forceSSL = true;
