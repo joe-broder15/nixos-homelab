@@ -3,6 +3,7 @@
 {
   imports = [
     ./shell.nix
+    ./gtk.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -118,8 +119,10 @@
 
   programs.git = {
     enable = true;
-    userName = "joe-broder15";
-    userEmail = "joe.broder@proton.me";
+    settings.user = {
+      name = "joe-broder15";
+      email = "joe.broder@proton.me";
+    };
   };
 
   # Let Home Manager install and manage itself.

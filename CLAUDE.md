@@ -22,8 +22,9 @@ This repo defines NixOS configurations for homelab machines, built with flakes.
 │   └── thinkpad/
 │       └── configuration.nix              # ThinkPad T14 desktop configuration with GNOME/GDM.
 ├── home/
+│   ├── gtk.nix                            # GTK theme (Dracula), icon theme (Papirus-Dark), and cursor theme (capitaine-cursors) config, imported by zircon.nix.
 │   ├── shell.nix                          # Shared zsh/shell configuration imported by zircon.nix.
-│   └── zircon.nix                         # Home Manager module for the zircon user (shared by standalone + thinkpad).
+│   └── zircon.nix                         # Home Manager module for the zircon user (shared by standalone + thinkpad); imports shell.nix and gtk.nix.
 └── scripts/
     ├── pull-and-rebuild.sh                # Pulls latest changes and runs nixos-rebuild switch for a given configuration.
     ├── pull-and-rebuild-home.sh           # Pulls latest changes and runs home-manager switch for a given home configuration.
