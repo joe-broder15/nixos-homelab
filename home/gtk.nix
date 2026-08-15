@@ -1,44 +1,21 @@
 { pkgs, ... }:
-
-let
-  # Dracula's GTK theme was removed from nixpkgs (depended on the
-  # unmaintained gtk-engine-murrine), so it's fetched directly here.
-  dracula-gtk-theme = pkgs.stdenvNoCC.mkDerivation {
-    pname = "dracula-gtk-theme";
-    version = "unstable-2024-05-14";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "dracula";
-      repo = "gtk";
-      rev = "81d0287950e8093dd8f8c753347763bce8588465";
-      sha256 = "0pvcp5j6ay8vmc3ydbshy9gcz5xk7m3hwkcn84m9mrw6h4w2vfl1";
-    };
-
-    dontBuild = true;
-
-    installPhase = ''
-      mkdir -p $out/share/themes/Dracula
-      cp -r . $out/share/themes/Dracula
-    '';
-  };
-in
 {
   gtk = {
     enable = true;
 
     theme = {
-      name = "Dracula";
-      package = dracula-gtk-theme;
+      name = "gruvbox-dark";
+      package = pkgs.gruvbox-dark-gtk;
     };
 
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "oomox-gruvbox-dark";
+      package = pkgs.gruvbox-dark-icons-gtk;
     };
 
     cursorTheme = {
-      name = "capitaine-cursors";
-      package = pkgs.capitaine-cursors;
+      name = "Capitaine Cursors (Gruvbox)";
+      package = pkgs.capitaine-cursors-themed;
       size = 24;
     };
 
@@ -46,16 +23,21 @@ in
       gtk-application-prefer-dark-theme = true;
     };
 
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
+    gtk4 = {
+      # gruvbox-dark-gtk ships no gtk-4.0 assets; GTK4 apps fall back to
+      # libadwaita's own dark styling via gtk-application-prefer-dark-theme.
+      theme = null;
+      extraConfig = {
+        gtk-application-prefer-dark-theme = true;
+      };
     };
   };
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
-      gtk-theme = "Dracula";
-      icon-theme = "Papirus-Dark";
-      cursor-theme = "capitaine-cursors";
+      gtk-theme = "gruvbox-dark";
+      icon-theme = "oomox-gruvbox-dark";
+      cursor-theme = "Capitaine Cursors (Gruvbox)";
       color-scheme = "prefer-dark";
     };
   };
