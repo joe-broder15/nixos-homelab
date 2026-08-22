@@ -52,6 +52,11 @@
               logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/proxmox.png";
               url = "https://proxmox.local.clubtropicalexcellent.vip";
             }
+            {
+              name = "Router";
+              logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/router.png";
+              url = "http://192.168.1.1";
+            }
           ];
         }
       ];
