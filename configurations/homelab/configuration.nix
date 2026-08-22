@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   config,
   lib,
@@ -15,7 +11,6 @@
     ./homer.nix
   ];
 
-  # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
@@ -25,13 +20,10 @@
     "flakes"
   ];
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     wget
     cifs-utils
     qbittorrent
@@ -51,16 +43,9 @@
   ];
 
   networking = {
-    # System hostname broadcast on the network.
     hostName = "nixos";
-
-    # Manage interfaces dynamically via NetworkManager.
     networkmanager.enable = true;
-
-    # WireGuard interface definition sourced from disk.
     wg-quick.interfaces.wg0.configFile = "/etc/nixos/wireguard/wg0.conf";
-
-    # Provide NAT for the WireGuard clients.
     nat = {
       enable = true;
       enableIPv6 = true;
@@ -69,10 +54,8 @@
     };
   };
 
-  # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -87,11 +70,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
-
-  # Configure keymap in X11
   services = {
-    # Keyboard layout for any X11 sessions.
     xserver = {
       xkb = {
         layout = "us";
@@ -99,10 +78,8 @@
       };
     };
 
-    # Secure remote management via SSH.
     openssh.enable = true;
 
-    # Headless BitTorrent client with web UI.
     qbittorrent = {
       enable = true;
       openFirewall = true;
@@ -110,14 +87,12 @@
       webuiPort = 8082;
     };
 
-    # Plex media server for streaming with firewall openings.
     plex = {
       enable = true;
       user = "user";
       openFirewall = true;
     };
 
-    # DDNS client
     ddns-updater = {
       enable = true;
       environment = {
@@ -138,7 +113,7 @@
 
     resilio = {
       enable = true;
-      enableWebUI = true; # To run the WebUI
+      enableWebUI = true;
       httpListenAddr = "127.0.0.1";
       httpListenPort = 9999;
       directoryRoot = "/resilio-shared-folders";
@@ -149,7 +124,7 @@
       daemon.enable = true;
     };
 
-    # Local LLM server, CPU-only for now.
+    # CPU-only until a GPU is available; swap to pkgs.ollama for GPU acceleration.
     ollama = {
       enable = true;
       package = pkgs.ollama-cpu;
@@ -158,23 +133,20 @@
       loadModels = [ "deepseek-r1:1.5b" ];
     };
 
-    # Web UI for the local ollama server.
     open-webui.enable = true;
-
   };
 
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
-      443
-      80
-      22
-      8080
-      11434
+      80 # HTTP — nginx redirects to HTTPS
+      443 # HTTPS — nginx
+      22 # SSH
+      8080 # Open WebUI
+      11434 # Ollama API — also opened by services.ollama.openFirewall
     ];
-  }; # ddns updater web ui; ollama's port is opened via services.ollama.openFirewall
+  };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.user = {
     isNormalUser = true;
     description = "user";
@@ -189,10 +161,10 @@
     "d /resilio-shared-folders 0750 rslsync rslsync -"
   ];
 
-  # Work around the sillytavern module symlinking config.yaml into the
-  # read-only Nix store, which makes SillyTavern unable to update it.
-  # Disable the upstream symlink and replace any existing symlink (from a
-  # previous activation) with a real, writable copy before each start.
+  # The upstream sillytavern module symlinks config.yaml into the read-only Nix
+  # store, which prevents SillyTavern from writing its own config at runtime.
+  # We clear that tmpfiles rule and replace any symlink with a writable copy on
+  # every service start.
   systemd.tmpfiles.settings.sillytavern."/var/lib/SillyTavern/config.yaml" = lib.mkForce { };
 
   systemd.services.sillytavern.preStart = ''
@@ -203,7 +175,6 @@
     fi
   '';
 
-  # map network shares
   fileSystems."/mnt/Library1" = {
     device = "//192.168.1.99/Library1";
     fsType = "cifs";
@@ -214,12 +185,6 @@
       [ "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=100" ];
   };
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
-
+  # Do not change; tracks the NixOS release that initialized stateful data paths.
+  system.stateVersion = "25.05";
 }

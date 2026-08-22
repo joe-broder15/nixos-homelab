@@ -31,7 +31,7 @@
       size = 10000;
       save = 10000;
       ignoreDups = true;
-      share = true; # share history across sessions
+      share = true;
     };
   };
 

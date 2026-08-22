@@ -1,11 +1,6 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running 'nixos-help').
-
 { config, pkgs, ... }:
 
 {
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -53,7 +48,7 @@
       "networkmanager"
       "wheel"
       "rslsync"
-    ]; # <-- added rslsync group
+    ];
     packages = with pkgs; [ ];
   };
 
@@ -79,7 +74,8 @@
     directoryRoot = "/resilio-shared-folders";
   };
 
-  # Ensure the resilio shared folder is group-writable by rslsync
+  # rslsync creates this dir as 0755 by default; setgid + group-write lets the
+  # zircon user (in the rslsync group) read and write synced files directly.
   systemd.tmpfiles.rules = [
     "d /resilio-shared-folders 2775 rslsync rslsync - -"
   ];
@@ -88,5 +84,7 @@
     "nix-command"
     "flakes"
   ];
+
+  # Do not change; tracks the NixOS release that initialized stateful data paths.
   system.stateVersion = "25.05";
 }

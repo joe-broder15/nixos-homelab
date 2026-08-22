@@ -22,7 +22,6 @@ in
     };
   };
 
-  # Plex host using the wildcard cert
   services.nginx.virtualHosts."plex.${baseDomain}" = {
     forceSSL = true;
     useACMEHost = baseDomain;
@@ -32,7 +31,6 @@ in
     };
   };
 
-  # qBittorrent host using the wildcard cert
   services.nginx.virtualHosts."qbittorrent.${baseDomain}" = {
     forceSSL = true;
     useACMEHost = baseDomain;
@@ -53,13 +51,11 @@ in
     };
   };
 
-  # Homer host using the wildcard cert
   services.nginx.virtualHosts."homer.${baseDomain}" = {
     useACMEHost = baseDomain;
     forceSSL = true;
   };
 
-  # SillyTavern host using the wildcard cert
   services.nginx.virtualHosts."sillytavern.${baseDomain}" = {
     forceSSL = true;
     useACMEHost = baseDomain;
@@ -69,7 +65,6 @@ in
     };
   };
 
-  # Resilio Sync host using the wildcard cert
   services.nginx.virtualHosts."resilio.${baseDomain}" = {
     forceSSL = true;
     useACMEHost = baseDomain;
@@ -79,7 +74,6 @@ in
     };
   };
 
-  # DDNS Updater host using the wildcard cert
   services.nginx.virtualHosts."ddns.${baseDomain}" = {
     forceSSL = true;
     useACMEHost = baseDomain;
@@ -89,7 +83,6 @@ in
     };
   };
 
-  # Open WebUI host using the wildcard cert
   services.nginx.virtualHosts."openwebui.${baseDomain}" = {
     forceSSL = true;
     useACMEHost = baseDomain;
@@ -114,7 +107,6 @@ in
     };
   };
 
-  # Proxmox host using the wildcard cert
   services.nginx.virtualHosts."proxmox.${baseDomain}" = {
     forceSSL = true;
     useACMEHost = baseDomain;
