@@ -15,7 +15,6 @@
   home.packages = with pkgs; [
     spotify
     tmux
-    vscode
     brave
     terminator
     nerd-fonts.gohufont
@@ -57,6 +56,16 @@
   dconf.settings."org/gnome/shell".enabled-extensions = [
     pkgs.gnomeExtensions.dash-to-panel.extensionUuid
   ];
+
+  # Match the terminal font configured for Terminator (see home.file above).
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode;
+    profiles.default.userSettings = {
+      "terminal.integrated.fontFamily" = "GohuFont 11 Nerd Font Mono";
+      "terminal.integrated.fontSize" = 11;
+    };
+  };
 
   programs.git = {
     enable = true;
