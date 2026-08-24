@@ -62,7 +62,7 @@
     enable = true;
     package = pkgs.vscode;
     profiles.default.userSettings = {
-      "terminal.integrated.fontFamily" = "GohuFont 11 Nerd Font Mono";
+      "terminal.integrated.fontFamily" = "'GohuFont 11 Nerd Font Mono', monospace";
       "terminal.integrated.fontSize" = 11;
     };
   };
