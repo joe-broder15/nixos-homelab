@@ -4,6 +4,7 @@
   imports = [
     ./shell.nix
     ./gtk.nix
+    ./vscode.nix
   ];
 
   home.username = "zircon";
@@ -52,26 +53,10 @@
 
   home.sessionVariables = { };
 
-  # Required for fontconfig to discover fonts installed via home.packages
-  # (e.g. nerd-fonts.gohufont); without this, apps that resolve fonts through
-  # fontconfig (like VS Code's integrated terminal) silently fall back to a
-  # default font instead of the one configured below.
-  fonts.fontconfig.enable = true;
-
   # GNOME extensions installed via home.packages must be explicitly enabled by UUID.
   dconf.settings."org/gnome/shell".enabled-extensions = [
     pkgs.gnomeExtensions.dash-to-panel.extensionUuid
   ];
-
-  # Match the terminal font configured for Terminator (see home.file above).
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscode;
-    profiles.default.userSettings = {
-      "terminal.integrated.fontFamily" = "GohuFont 11 Nerd Font Mono";
-      "terminal.integrated.fontSize" = 11;
-    };
-  };
 
   programs.git = {
     enable = true;
