@@ -52,6 +52,12 @@
 
   home.sessionVariables = { };
 
+  # Required for fontconfig to discover fonts installed via home.packages
+  # (e.g. nerd-fonts.gohufont); without this, apps that resolve fonts through
+  # fontconfig (like VS Code's integrated terminal) silently fall back to a
+  # default font instead of the one configured below.
+  fonts.fontconfig.enable = true;
+
   # GNOME extensions installed via home.packages must be explicitly enabled by UUID.
   dconf.settings."org/gnome/shell".enabled-extensions = [
     pkgs.gnomeExtensions.dash-to-panel.extensionUuid
