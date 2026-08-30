@@ -50,7 +50,7 @@
     enableZshIntegration = true;
     settings = {
       format = ''
-        [╭╴](fg:arrow)$username$os$git_branch(at $directory)$cmd_duration(via $python$conda$nodejs$c$rust$java)
+        [╭╴](fg:arrow)$username$os$git_branch$git_status(at $directory)$cmd_duration$time(via $python$conda$nodejs$c$rust$java$docker_context)
         [╰─](fg:arrow)$character'';
 
       add_newline = true;
@@ -87,7 +87,7 @@
       os = {
         format = "on [($name)]($style) ";
         style = "bold blue";
-        disabled = true;
+        disabled = false;
         symbols = {
           Alpine = " ";
           Arch = " ";
@@ -124,7 +124,7 @@
       };
 
       time = {
-        disabled = true;
+        disabled = false;
         format = "at [󱑈 $time]($style)";
         time_format = "%H:%M";
         style = "bold fg:time";
@@ -145,11 +145,11 @@
       git_status = {
         format = "[ $all_status$ahead_behind ]($style)";
         style = "fg:text_color bg:git";
-        disabled = true;
+        disabled = false;
       };
 
       docker_context = {
-        disabled = true;
+        disabled = false;
         symbol = " ";
       };
 
@@ -186,7 +186,7 @@
         style = "bg:java fg:text_light";
         version_format = "\${raw}";
         symbol = " ";
-        disabled = true;
+        disabled = false;
       };
 
       c = {
@@ -194,7 +194,7 @@
         style = "bg:clang fg:text_light";
         symbol = " ";
         version_format = "\${raw}";
-        disabled = true;
+        disabled = false;
       };
 
       rust = {
@@ -202,7 +202,7 @@
         style = "bg:rust fg:text_light";
         symbol = " ";
         version_format = "\${raw}";
-        disabled = true;
+        disabled = false;
       };
     };
   };

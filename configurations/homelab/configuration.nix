@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   ...
@@ -7,6 +6,7 @@
 
 {
   imports = [
+    ./domain.nix
     ./proxy.nix
     ./homer.nix
   ];
@@ -37,7 +37,6 @@
     ddns-updater
     homer
     sillytavern
-    tailscale
     resilio-sync
     clamav
   ];
@@ -154,7 +153,6 @@
       "networkmanager"
       "wheel"
     ];
-    packages = with pkgs; [ ];
   };
 
   systemd.tmpfiles.rules = [

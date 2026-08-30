@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   boot.loader.systemd-boot.enable = true;
@@ -49,7 +49,6 @@
       "wheel"
       "rslsync"
     ];
-    packages = with pkgs; [ ];
   };
 
   programs.firefox.enable = true;

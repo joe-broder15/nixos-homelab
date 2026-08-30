@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -25,7 +25,6 @@
     keepassxc
     claude-code
     gh
-    zsh
     gnomeExtensions.dash-to-panel
   ];
 
@@ -50,8 +49,6 @@
     '';
   };
 
-  home.sessionVariables = { };
-
   # GNOME extensions installed via home.packages must be explicitly enabled by UUID.
   dconf.settings."org/gnome/shell".enabled-extensions = [
     pkgs.gnomeExtensions.dash-to-panel.extensionUuid
@@ -67,7 +64,7 @@
     package = pkgs.vscode;
     profiles.default.userSettings = {
       "terminal.integrated.fontFamily" = "'GohuFont 11 Nerd Font Mono'";
-      "terminal.integrated.fontSize" = 11;
+      "terminal.integrated.fontSize" = 12;
     };
   };
 

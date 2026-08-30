@@ -1,10 +1,13 @@
-{ ... }:
+{ baseDomain, ... }:
 
+let
+  logo = name: "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/${name}.png";
+in
 {
   services.homer = {
     enable = true;
     virtualHost = {
-      domain = "homer.local.clubtropicalexcellent.vip";
+      domain = "homer.${baseDomain}";
       nginx.enable = true;
     };
     settings = {
@@ -18,43 +21,42 @@
           items = [
             {
               name = "Plex";
-              logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/plex.png";
-              url = "https://plex.local.clubtropicalexcellent.vip";
+              logo = logo "plex";
+              url = "https://plex.${baseDomain}";
             }
             {
               name = "qBittorrent";
-              logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/qbittorrent.png";
-              url = "https://qBittorrent.local.clubtropicalexcellent.vip";
-
+              logo = logo "qbittorrent";
+              url = "https://qbittorrent.${baseDomain}";
             }
             {
               name = "SillyTavern";
-              logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/sillytavern.png";
-              url = "https://sillytavern.local.clubtropicalexcellent.vip";
+              logo = logo "sillytavern";
+              url = "https://sillytavern.${baseDomain}";
             }
             {
               name = "Resilio Sync";
-              logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/resiliosync.png";
-              url = "https://resilio.local.clubtropicalexcellent.vip";
+              logo = logo "resiliosync";
+              url = "https://resilio.${baseDomain}";
             }
             {
               name = "DDNS Updater";
-              logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/ddns-updater.png";
-              url = "https://ddns.local.clubtropicalexcellent.vip";
+              logo = logo "ddns-updater";
+              url = "https://ddns.${baseDomain}";
             }
             {
               name = "Open WebUI";
-              logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/open-webui.png";
-              url = "https://openwebui.local.clubtropicalexcellent.vip";
+              logo = logo "open-webui";
+              url = "https://openwebui.${baseDomain}";
             }
             {
               name = "Proxmox";
-              logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/proxmox.png";
-              url = "https://proxmox.local.clubtropicalexcellent.vip";
+              logo = logo "proxmox";
+              url = "https://proxmox.${baseDomain}";
             }
             {
               name = "Router";
-              logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/router.png";
+              logo = logo "router";
               url = "http://192.168.1.1";
             }
           ];
