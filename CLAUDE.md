@@ -17,6 +17,7 @@ This repo defines NixOS configurations for homelab machines, built with flakes.
 ├── configurations/
 │   ├── homelab/
 │   │   ├── configuration.nix              # Main host module: packages, networking, users, and service options (incl. Ollama + Open WebUI).
+│   │   ├── domain.nix                     # Defines the shared baseDomain module arg used by proxy.nix and homer.nix.
 │   │   ├── homer.nix                      # Homer dashboard config listing links to other services.
 │   │   └── proxy.nix                      # nginx reverse proxy and ACME wildcard certificate config.
 │   └── thinkpad/
