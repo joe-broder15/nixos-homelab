@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./hosts.nix
+  ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -63,6 +67,7 @@
     resilio-sync
     home-manager
     gnome-tweaks
+    cifs-utils
   ];
 
   services.resilio = {
@@ -83,6 +88,16 @@
     "nix-command"
     "flakes"
   ];
+
+  fileSystems."/mnt/Library1" = {
+    device = "//synology.local/Library1";
+    fsType = "cifs";
+    options =
+      let
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in
+      [ "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=100" ];
+  };
 
   # Do not change; tracks the NixOS release that initialized stateful data paths.
   system.stateVersion = "25.05";

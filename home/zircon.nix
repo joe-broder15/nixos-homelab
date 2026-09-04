@@ -4,6 +4,7 @@
   imports = [
     ./shell.nix
     ./gtk.nix
+    ./alias.nix
   ];
 
   home.username = "zircon";
@@ -26,6 +27,7 @@
     claude-code
     gh
     gnomeExtensions.dash-to-panel
+    tree
   ];
 
   home.file = {

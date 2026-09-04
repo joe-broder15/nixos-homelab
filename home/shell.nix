@@ -16,20 +16,9 @@
       ];
     };
 
-    shellAliases = {
-      ll = "ls -lhrt";
-      gs = "git status";
-      # Reload the zircon Home Manager config from this repo's flake. Resolves
-      # the repo root at runtime, so it works wherever the repo is cloned (run
-      # from anywhere inside the working tree).
-      hmr = "home-manager switch --flake \"$(git rev-parse --show-toplevel)#zircon\"";
-      # Pull latest changes first, then reload.
-      hmp = "git -C \"$(git rev-parse --show-toplevel)\" pull && home-manager switch --flake \"$(git rev-parse --show-toplevel)#zircon\"";
-    };
-
     history = {
-      size = 10000;
-      save = 10000;
+      size = 100000;
+      save = 100000;
       ignoreDups = true;
       share = true;
     };

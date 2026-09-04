@@ -21,11 +21,13 @@ This repo defines NixOS configurations for homelab machines, built with flakes.
 │   │   ├── homer.nix                      # Homer dashboard config listing links to other services.
 │   │   └── proxy.nix                      # nginx reverse proxy and ACME wildcard certificate config.
 │   └── thinkpad/
-│       └── configuration.nix              # ThinkPad T14 desktop configuration with GNOME/GDM.
+│       ├── configuration.nix              # ThinkPad T14 desktop configuration with GNOME/GDM; also mounts the Synology CIFS share.
+│       └── hosts.nix                      # Static hosts-file entry resolving synology.local, imported by configuration.nix.
 ├── home/
+│   ├── alias.nix                          # Shell aliases (ll, gs, hmr, hmp, home, syno) imported by zircon.nix.
 │   ├── gtk.nix                            # GTK theme (Dracula), icon theme (Papirus-Dark), and cursor theme (capitaine-cursors) config, imported by zircon.nix.
-│   ├── shell.nix                          # Shared zsh/shell configuration imported by zircon.nix.
-│   └── zircon.nix                         # Home Manager module for the zircon user (shared by standalone + thinkpad); imports shell.nix and gtk.nix.
+│   ├── shell.nix                          # Shared zsh/bash/starship configuration imported by zircon.nix.
+│   └── zircon.nix                         # Home Manager module for the zircon user (shared by standalone + thinkpad); imports shell.nix, gtk.nix, and alias.nix.
 └── scripts/
     ├── pull-and-rebuild.sh                # Pulls latest changes and runs nixos-rebuild switch for a given configuration.
     ├── pull-and-rebuild-home.sh           # Pulls latest changes and runs home-manager switch for a given home configuration.
